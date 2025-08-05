@@ -36,19 +36,73 @@ An AI-powered chatbot that gives you real-time summaries of the **latest news ab
 
 ---
 
-## 🛠️ Installation & Setup
+## 🔧 Installation (Colab or Local)
 
-You can run it on **Google Colab** or locally.
+Run the following to install all dependencies:
 
-### 🔗 Run in Colab
+bash
+pip install -q --upgrade \
+  gradio \
+  googlesearch-python \
+  beautifulsoup4 \
+  requests \
+  llama-cpp-python \
+  transformers \
+  rapidfuzz \
+  spacy[transformers]
 
-> [Open in Colab](https://colab.research.google.com/)
+python -m spacy download en_core_web_trf
 
-### 📦 Local Installation
 
-```bash
-git clone https://github.com/Sidharth-Subramonian/CompanyNewsBot.git
-cd CompanyNewsBot
+---
 
-pip install -r requirements.txt
+## ▶ Run the App
+
+Just execute the Python file or run all cells in the Colab notebook:
+
+python
 python app.py
+
+
+Or, launch in Colab with gr.Interface().launch(debug=True).
+
+---
+
+## 💬 Example Queries
+
+> “Give me latest news about Zoho and Infosys”  
+> “What’s up with Apple?”  
+> “Show me updates from Google, Meta, and Tesla”  
+> “Hi” → Normal greetings supported  
+> “Tell me about news” → Handled as non-company query
+
+---
+
+## 🎯 How It Works
+
+### 1. User Input → NLP → Company Names
+- Extracts company names using spaCy NER
+- Applies fuzzy matching against KNOWN_COMPANIES list
+- Filters out generic words like “news”, “report”, “give”
+
+### 2. Company → Google Search → Top 3 Links
+- googlesearch-python used to get latest links for that company
+- Not restricted to 1-day or 7-day filters — fetches current latest news results
+
+### 3. Scraping & Summarization
+- Scrapes article paragraphs using BeautifulSoup
+- Summarizes using sshleifer/distilbart-cnn-12-6 via Hugging Face Transformers
+- Summaries styled as Formal, Casual, or Bullet Points
+
+### 4. Chat Response
+- Summarized news displayed per company
+- If content fails, links are shown under "📎 Additional Links"
+
+---
+
+## 📦 Project Structure
+
+
+├── app.py               # Main script (everything in one file)
+├── README.md            # This file
+
