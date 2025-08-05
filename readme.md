@@ -1,4 +1,4 @@
-# 📰 Smart Company News Chatbot
+# 📰 Company News Bot
 
 An AI-powered chatbot that gives you real-time summaries of the **latest news about any company**. Just type a question like "What's new with Apple and Google?" and get clean, concise updates.
 
@@ -100,6 +100,54 @@ Or, launch in Colab with gr.Interface().launch(debug=True).
 
 ---
 
+## 🧭 Architecture Diagram
+
+
++-------------------------+
+|      User Input         |
+|  (via Gradio Web UI)    |
++-----------+-------------+
+            |
+            v
++-------------------------+
+|      ChatAgent          |
+|  • Detects intent       |
+|  • Extracts company     |
+|  • Fuzzy matches names  |
++-----------+-------------+
+            |
+            v
++-------------------------+
+|     SearchAgent         |
+| • Google search (top 3) |
+| • Query: "{company} latest news"
++-----------+-------------+
+            |
+            v
++-------------------------+
+|     ScrapeAgent         |
+| • Extract text from     |
+|   article using         |
+|   BeautifulSoup         |
++-----------+-------------+
+            |
+            v
++-------------------------+
+|   SummarizerAgent       |
+| • Summarize content     |
+|   using Hugging Face    |
+|   DistilBART model      |
++-----------+-------------+
+            |
+            v
++-------------------------+
+|     Gradio UI Output    |
+| • Summaries styled as   |
+|   Formal / Casual / Bullets
+| • Extra links if needed |
++-------------------------+
+
+---
 ## 📦 Project Structure
 
 
