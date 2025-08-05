@@ -102,7 +102,7 @@ Or, launch in Colab with gr.Interface().launch(debug=True).
 
 ## 🧭 Architecture Diagram
 
-
+```
 User ↔ Gradio UI
         ↓
     Upload PDF
@@ -127,7 +127,7 @@ Pass chunks + query to Gemma LLM
      Generate Answer
         ↓
  Display Response in Gradio Chat UI
-
+```
 
 
 ---
