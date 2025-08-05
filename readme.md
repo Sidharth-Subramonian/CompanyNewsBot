@@ -31,7 +31,6 @@ An AI-powered chatbot that gives you real-time summaries of the **latest news ab
 | Scraping         | `requests`, `beautifulsoup4`             |
 | Summarization    | `sshleifer/distilbart-cnn-12-6` (Hugging Face Transformers) |
 | NLP / NER        | `spaCy` with `en_core_web_trf`           |
-| Spell Handling   | Built-in fuzzy logic + optional `textblob`|
 
 ---
 
