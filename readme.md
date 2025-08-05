@@ -104,5 +104,6 @@ Or, launch in Colab with gr.Interface().launch(debug=True).
 
 
 ├── app.py               # Main script (everything in one file)
+
 ├── README.md            # This file
 
