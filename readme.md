@@ -31,7 +31,6 @@ An AI-powered chatbot that gives you real-time summaries of the **latest news ab
 | Scraping         | `requests`, `beautifulsoup4`             |
 | Summarization    | `sshleifer/distilbart-cnn-12-6` (Hugging Face Transformers) |
 | NLP / NER        | `spaCy` with `en_core_web_trf`           |
-| Fuzzy Matching   | `rapidfuzz`                              |
 | Spell Handling   | Built-in fuzzy logic + optional `textblob`|
 
 ---
@@ -103,30 +102,55 @@ Or, launch in Colab with gr.Interface().launch(debug=True).
 ## 🧭 Architecture Diagram
 
 ```
-User ↔ Gradio UI
-        ↓
-    Upload PDF
-        ↓
-   Parse PDF (PyMuPDF)
-        ↓
-  Chunking Strategy (Split text)
-        ↓
-Embed Chunks (SentenceTransformers)
-        ↓
-Store Embeddings in Qdrant
-        ↓
-        ↑
-   User enters a query
-        ↓
-Semantic Search (Qdrant)
-        ↓
- Retrieve Top Matching Chunks
-        ↓
-Pass chunks + query to Gemma LLM
-        ↓
-     Generate Answer
-        ↓
- Display Response in Gradio Chat UI
++----------------------+
+|  User Input (Gradio) |
++----------+-----------+
+           |
+           v
++----------------------+       +----------------------+
+|      ChatAgent       |<----->|   Known Companies DB |
+|----------------------|       +----------------------+
+| - Detects intent     |
+| - Extracts company   |
+| - Fuzzy matches name |
++----------+-----------+
+           |
+           v
++----------------------+
+|    SearchAgent       |
+|----------------------|
+| - Google search top  |
+|   3 links for:       |
+|   "Company latest news" |
++----------+-----------+
+           |
+           v
++----------------------+
+|    ScrapeAgent       |
+|----------------------|
+| - Extract article    |
+|   text (BeautifulSoup)|
++----------+-----------+
+           |
+           v
++-----------------------------+
+|      SummarizerAgent       |
+|-----------------------------|
+| - Summarizes using         |
+|   HuggingFace transformers |
+| - Supports 3 styles:       |
+|   Formal, Casual, Bullets  |
++----------+------------------+
+           |
+           v
++-----------------------------+
+|       Gradio Chat UI       |
+|-----------------------------|
+| - Display company-wise news|
+| - Show summary + link      |
+| - Show fallback links      |
++-----------------------------+
+
 ```
 
 
