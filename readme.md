@@ -1,55 +1,54 @@
-# 🧠 Company News Chatbot
+# 📰 Smart Company News Chatbot
 
-A smart, AI-powered chatbot that finds and summarizes the latest news about any company in real-time—using only free and open-source tools. No paid APIs. No ChatGPT. Just reliable and fresh news delivered in your chosen style via an interactive web interface.
+An AI-powered chatbot that gives you real-time summaries of the **latest news about any company**. Just type a question like "What's new with Apple and Google?" and get clean, concise updates.
 
----
-
-## 🚀 Problem Statement
-
-Build a smart chatbot that can:
-
-✅ Take one or more company names from user input  
-✅ Search the internet in real-time for the latest news about those companies  
-✅ Scrape news article content and summarize it using open-source AI  
-✅ Return summaries with source links in your chosen style  
-✅ Handle typos, greetings, off-topic questions like a conversational agent  
-✅ Use no paid APIs (like NewsAPI or Google News API)  
-✅ Run with an easy-to-use web UI (Gradio, Streamlit, Chainlit or Reflex)
+> ✅ Built using only **free, open-source tools**.  
+> ✅ No paid APIs.  
+> ✅ Web UI powered by **Gradio**.
 
 ---
 
-## 🎯 Features
+## 🚀 Features
 
-- 🔍 Real-time company news via Google search
-- 🕸️ Article content scraped with BeautifulSoup
-- 🤖 Summarization using Hugging Face Transformers (distilbart-cnn-12-6)
-- ✍️ Choose your style: Formal, Casual, or Bullet Points
-- 🧠 Fuzzy matching to handle typos and incorrect company names
-- 💬 Chatbot mode handles general questions and greetings
-- ✅ Fully free: no API keys, no paywalls, no dependencies on commercial LLMs
-- 🖥️ Built using Gradio (can be extended to Streamlit or Chainlit)
-
----
-
-## 🔧 Tech Stack
-
-| Component       | Tool / Library                      |
-|----------------|--------------------------------------|
-| Web Interface   | Gradio                              |
-| Web Search      | googlesearch-python                 |
-| Scraping        | requests, BeautifulSoup4            |
-| Summarization   | distilbart-cnn-12-6 from 🤗 Transformers |
-| Typo Handling   | RapidFuzz                           |
-| Chat Logic      | Rule-based with basic NLP           |
-| Language        | Python 3.x                          |
+- 🔎 **Real-time news search** using web scraping and Google Search
+- 🧠 **Summarized articles** using HuggingFace `distilbart-cnn-12-6`
+- 🤖 Handles **greetings**, **casual language**, and **typos**
+- ✨ Choose output style: Formal, Casual, or Bullet Points
+- 🧩 Modular architecture with multiple AI agents:
+  - SearchAgent
+  - ScrapeAgent
+  - SummarizerAgent
+  - ChatAgent (for parsing, NER, fuzzy matching)
 
 ---
 
-## 📦 Installation
+## 🔧 Tools & Libraries Used
 
-Clone this repo and install dependencies:
+| Component        | Tool/Model                              |
+|------------------|------------------------------------------|
+| UI               | Gradio                                   |
+| Search           | `googlesearch-python`                    |
+| Scraping         | `requests`, `beautifulsoup4`             |
+| Summarization    | `sshleifer/distilbart-cnn-12-6` (Hugging Face Transformers) |
+| NLP / NER        | `spaCy` with `en_core_web_trf`           |
+| Fuzzy Matching   | `rapidfuzz`                              |
+| Spell Handling   | Built-in fuzzy logic + optional `textblob`|
+
+---
+
+## 🛠️ Installation & Setup
+
+You can run it on **Google Colab** or locally.
+
+### 🔗 Run in Colab
+
+> [Open in Colab](https://colab.research.google.com/)
+
+### 📦 Local Installation
 
 ```bash
-git clone https://github.com/yourusername/company-news-chatbot.git
-cd company-news-chatbot
+git clone https://github.com/Sidharth-Subramonian/CompanyNewsBot.git
+cd CompanyNewsBot
+
 pip install -r requirements.txt
+python app.py
